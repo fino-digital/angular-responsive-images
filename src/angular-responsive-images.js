@@ -1,5 +1,3 @@
-(function(){
-
 var app = angular.module('bhResponsiveImages', []);
 
 // Default queries (stolen from Zurb Foundation)
@@ -40,20 +38,20 @@ app.directive('bhSrcResponsive', ['presetMediaQueries', '$timeout', function(pre
       });
 
       // Array of media query and listener sets
-      // 
+      //
       // {
       //    mql: <MediaQueryList object>
-      //    listener: function () { ... } 
+      //    listener: function () { ... }
       // }
-      // 
+      //
       var listenerSets = [];
 
-      // Query that gets run on link, whenever the directive attr changes, and whenever 
+      // Query that gets run on link, whenever the directive attr changes, and whenever
       var waiting = false;
       function updateFromQuery(querySets) {
         // Throttle calling this function so that multiple media query change handlers don't try to run concurrently
         if (!waiting) {
-          $timeout(function() { 
+          $timeout(function() {
             // Destroy registered listeners, we will re-register them below
             angular.forEach(listenerSets, function(set) {
               set.mql.removeListener(set.listener);
@@ -106,12 +104,12 @@ app.directive('bhSrcResponsive', ['presetMediaQueries', '$timeout', function(pre
 
             waiting = false;
           }, 0);
-          
+
           waiting = true;
         }
       }
 
-      
+
       function setSrc(src) {
         elm.attr('src', src);
       }
@@ -119,7 +117,7 @@ app.directive('bhSrcResponsive', ['presetMediaQueries', '$timeout', function(pre
       var updaterDereg;
       attrs.$observe('bhSrcResponsive', function(value) {
         var querySets = scope.$eval(value);
-        
+
         if (querySets instanceof Array === false) {
           throw "Expected evaluate bh-src-responsive to evaluate to an Array, instead got: " + querySets;
         }
@@ -147,5 +145,3 @@ app.directive('bhSrcResponsive', ['presetMediaQueries', '$timeout', function(pre
     }
   };
 }]);
-
-})();

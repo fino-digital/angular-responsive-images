@@ -18,6 +18,7 @@
     "images",
     "mobile"
   ],
+  "main": "index.js",
   "author": "Brian Hann",
   "license": "MIT",
   "devDependencies": {
